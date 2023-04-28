@@ -1,20 +1,28 @@
-import React from 'react'
+import {formatISO9075} from "date-fns";
+import {Link} from "react-router-dom";
 
-export default function Post() {
+
+export default function Post({_id, title, summary, cover, content, createdAt, author}) {
   return (
     <div>
         {/* ----Start of post----- */}
         <div className="post">
-            <div className="image">
-                <img src="https://techcrunch.com/wp-content/uploads/2023/03/reddit.jpg?w=850&h=492&crop=1" alt="" />
+            <div className="image">               
+                <Link to={`/post/${_id}`}>
+                    <img src={'http://localhost:4000/' + cover} alt="" />
+                </Link>               
+                
             </div>
-            <div className="texts">
-                <h2>Lorem ipsum dolor sit amet consectetur, adipisicing</h2>
-                <p className="info">
-                    <a href="author">Ifeanyi Raph</a>
-                    <time>2023-04-19 4:20</time>
+            <div className="texts"> 
+                <Link to={`/post/${_id}`}>
+                    <h2>{title}</h2>  
+                </Link>                
+                       
+                    <p className="info">
+                    <a href="author">{author.username}</a>
+                    <time>{formatISO9075(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
                 </p>
-                <p className="summary">Lorem ipsum dolor, sit amet consectetur adipisi Perferendis dignissimos expedita laborum harum iste cupiditate aspernatur vel, repellendus qui neque.</p>
+                <p className="summary">{summary}</p>
             </div>
         </div>
         
